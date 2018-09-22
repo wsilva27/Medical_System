@@ -52,10 +52,6 @@ try {
     ROOM_ID INT FOREIGN KEY REFERENCES Rooms(ROOM_ID),
     )";
 
-
-
-
-
     // use exec() because no results are returned
     $conn->exec($sql);
     echo "Table MyGuests created successfully";
