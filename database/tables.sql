@@ -1,7 +1,7 @@
 -- generally, state field would be used as reference
 CREATE TABLE States (
 	STATE_ID INT(2) NOT NULL AUTO_INCREMENT PRIMARY KEY, 
-	STATE_NAME VARCHAR(20) NOT NULL,
+	STATE_NAME VARCHAR(40) NOT NULL,
     STATE_CODE CHAR(2) NOT NULL 
 );
 
