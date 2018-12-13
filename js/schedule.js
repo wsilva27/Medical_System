@@ -1,20 +1,20 @@
 $(document).ready( function () {
-    
+
     /* Activating events for dynamically generated objects through jQuery */
     var events = $('#events');
     
     /* Getting data to the datatables */
-    user.Get().then(function(res){
+    schedule.Get().then(function(res){
         var table = $('#table').DataTable({
-            data: res.data,    
+            data: res.data,
             select: true,
-            "columns": [
-                { "data": "USER_ID" },
-                { "data": "FIRST_NAME" },
-                { "data": "LAST_NAME" },
-                { "data": "USER_NAME" },
-                { "data": "DEPT_NAME" },
-                { "data": "GROUP_NAME" }
+            columns: [
+                { data: 'patientid' },
+                { data: 'name' },
+                { data: 'dob' },
+                { data: 'address' },
+                { data: 'phone' },
+                { data: 'insurance' }
             ],
             columnDefs:[
                 {    /* Make certain columns invisible */
@@ -33,7 +33,7 @@ $(document).ready( function () {
         });
 
         /* Add the "New" button to the toolbar at the top of the datatables */
-        $('#table_filter').append('<b><button class="btn btn-sm btn-outline-secondary add" onclick="user.new();" style="margin-left: 20px;margin-top:-4px;"><i class="fas fa-user-plus"></i> New</button></b>');        
+        $('#table_filter').append('<b><button class="btn btn-sm btn-outline-secondary add" onclick="patient.new();" style="margin-left: 20px;margin-top:-4px;"><i class="fas fa-id-card-alt"></i> New</button></b>');      
 
         /* When the row of the data table is pressed, will be transit to detail page. */
         $('#table tbody').on('click', 'tr', function (){
@@ -48,9 +48,10 @@ $(document).ready( function () {
                 });
         });
     });
+    
 });
 
-var user = new function(){
+var schedule = new function(){
     
     /* Getting data from php in api folder using jQuery.ajax */
     /* "$." is equal to "jquery." */
@@ -58,7 +59,7 @@ var user = new function(){
         return $.ajax({
                     method: 'POST',
                     dataType: 'json',
-                    url: '../../api/get.user.php',
+                    url: '../../api/get.schedule.php',
                     contentType: 'application/json',
                     success: function(data, textStatus, jQxhr){
                         return data;
@@ -67,12 +68,11 @@ var user = new function(){
                         console.log(errorThrown);
                     }
         });
-    };  
-    
+    };    
+
     /* When creating new details, set the ID value to 0 in the session and hand it over to the detail screen */
     this.new = function(){
-        console.log('aaaa');
-        $.post('../../api/set.session.php', { "idx": '0' })
+        $.post('../../api/set.session.php', { idx: '0' })
             .done(function(data){
                 window.location='./profile.php';
             });
