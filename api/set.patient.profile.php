@@ -31,6 +31,11 @@
     $provider = $_REQUEST['provider'];
     $insurance = $_REQUEST['insurance'];
 
+    /* 
+        Check whether adding new or modifying existing data to call each function 
+        if id is 0, add a new one -> call post() function in lib folder
+        if id is not 0, modify a exist one -> call put() function in lib folder
+    */
     if($id == '0'){
         $res = patient\profile\post($name, $dob, $bloodtype, $address, $city, $state, $zip, $phone, $email, $provider, $insurance);
     }else{
