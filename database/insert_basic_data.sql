@@ -1,4 +1,3 @@
-CREATE DATABASE MEDICAL4U;
 USE MEDICAL4U;
 
 INSERT INTO UserGroups (GROUP_NAME, DESCRIPTION)VALUES 
@@ -131,21 +130,122 @@ INSERT INTO SPECIALTIES (SPECIALTIES_NAME) VALUES
 ('Vascular Surgery');
 
 
-INSERT INTO Locations (CITY, STATE_ID, ADDRESS, ZIP) VALUES
-('GLEN HEAD', 37, '30 POST STREET', '11545');
+INSERT INTO Locations (LOC_NAME, CITY, STATE_ID, ADDRESS, ZIP) VALUES
+('NYU Langone Medical Associates', 'New York', 37, '196 Canal St', '10013'),
+('NewYork-Presbyterian Lower', 'New York', 37, '170 William St', '10038'),
+('Long Isand College Hospital', 'Brooklyn', 37, '339 Hicks St', '11201'),
+('Brookyn Hospital Center-Downtown', 'Brooklyn', 37, '121 Dekalb Ave', '11201'),
+('Mount Sinai Queens', 'Long Island City', 37, '25-10 30th Ave', '11102'),
+('NYC Health Hospital-Elmhurst', 'Elmhurst', 37, '79-01 Broadway', '11373'),
+('Long Island Jewish Forest Hills', 'Forest Hills', 37, '102-01 66th Rd', '11375'),
+('Northwell Health', 'Queens', 37, '270-05 76th Ave', '11040');
 
 
 INSERT INTO Rooms (LOC_ID, ROOM_NUMBER) VALUES
-(1, 1);
+(1, '1A'),
+(1, '1B'),
+(1, '1C'),
+(1, '1D'),
+(1, '1E'),
+(2, '201'),
+(2, '301'),
+(3, '401'),
+(3, '402'),
+(3, '403'),
+(3, '404'),
+(4, '102-A'),
+(4, '102-B'),
+(4, '102-C');
 
 
-INSERT INTO Doctors (DOC_NAME, DOC_PHONE, SUFFIX) VALUES ('Michael Overby', '(516) 569-4709', 'MD');
+
+INSERT INTO Doctors (DOC_NAME, DOC_PHONE, SUFFIX) VALUES 
+-- ('Michael Overby', '(516) 569-4709', 'MD'),
+('Martin Blaser', '(646) 501-4386', 'MD'),
+('Jose U Scher', '(646) 501-7400', 'MD'),
+('John G. Golfinos', '(212) 263-2950', 'MD'),
+('Alon Mogilner', '(212) 263-2607', 'MD, PhD'),
+('Sunil P. Malhotra', '(973) 926-3500', 'MD'),
+('Nada G. Abou-Fayssal', '(718) 630-8600', 'MD'),
+('Kirk A. Campbell', '(212) 513-7711', 'MD'),
+('Alisa Altman', '(631) 425-2110', 'MD'),
+('Bruce Gerberg', '(631) 425-2110', 'MD'),
+('Dina M. DiMaggio', '(718) 857-5500', 'MD'),
+('Erich G. Anderer', '(718) 630-6580', 'MD'),
+('Joseph W. Dryer', '(646) 501-7200', 'MD'),
+('Yong H. Kim', '(212) 427-3986', 'MD');
 
 
 INSERT INTO DoctorLocations (DOC_ID, LOC_ID) VALUES
-(1, 1);
+(1, 1),
+(1, 4),
+(1, 5);
 
 
 INSERT INTO DoctorSpecialties (DOC_ID, SPECIALTIES_ID) VALUES
 (1, 1), (1, 3), (1, 5);
 
+
+INSERT INTO BloodTypes (BLOOD_TYPE_NAME) VALUES
+('Unknown'), ('RH+ A'), ('RH- A'), ('RH+ B'), ('RH- B'), ('RH+ AB'), ('RH- AB'), ('RH+ O'), ('RH- O');
+
+INSERT INTO Providers (PROVIDER) VALUES 
+('Aetna'), 
+('AmeriHealth'), 
+('Anthem Blue Cross Blue Shield'), 
+('Assurant Health'), 
+('Blue Cross Blue Shield'), 
+('Blue Cross Blue Shield Association'), 
+('Capital District Physicians Health Plan'), 
+('CareFirst Blue Cross Blue Shield'), 
+('CHA Health'), 
+('Cigna'), 
+('Coventry Health Care'), 
+('Destiny Health'), 
+('Easy Choice'), 
+('Emblemhealth'), 
+('Empire Blue Cross Blue Shield'), 
+('Excellus Blue Cross Blue Shield'), 
+('Fallon Community Health Plan'), 
+('Fidelis Health Care Insurance'), 
+('Fortis Health'), 
+('Golden Rule'), 
+('Group Health Cooperative'), 
+('Group Health Incorporated (GHI)'), 
+('Harvard Pilgrim'), 
+('Health Net'), 
+('Health Now BlueCross BlueShield of NorthWestern, NY'), 
+('Health Now dba BlueShield of NorthEastern NY'), 
+('Health Partners'), 
+('Health Plan of Nevada'), 
+('Health Republic Insurance of NY'), 
+('Healthfirst Health Insurance New York'), 
+('HealthSpring'), 
+('HIP Health Plan of New York'), 
+('Horizon Blue Cross Blue Shield'), 
+('Horizon Healthcare NY'), 
+('Humana'), 
+('Independence Blue Cross'), 
+('Independent Health'), 
+('Kaiser Permanente'), 
+('LifeWise Health Plans'), 
+('Medica'), 
+('Medical Mutual of Ohio'), 
+('MetroPlus Health Plan New York'), 
+('Midwest Security'), 
+('Monumental Life'), 
+('MVP (Mohawk Valley Physicians Health Plan)'), 
+('Oscar Health Insurance Plan For New York'), 
+('Oxford Health Plans'), 
+('PacifiCare Health Systems'), 
+('Premera Blue Cross Blue Shield'), 
+('Principal Life Insurance Company'), 
+('QualChoice'), 
+('Regence Blue Cross Blue Shield'), 
+('Today’s Option [American’s Progressive] Health Insurance'), 
+('Tufts Health Plan'), 
+('UniCare'), 
+('United Health Insurance for New York'), 
+('Univera'), 
+('Vista Health Plan'), 
+('Wellmark Blue Cross and Blue Shield');
