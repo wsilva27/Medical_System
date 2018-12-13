@@ -7,8 +7,12 @@
     /* Start the session */
     session_start();
 
-    /* Add back-end libraries below */
-    require_once "../lib/specialty.profile.php";
+    /* Add back-end libraries here */
+    require_once "../lib/doctor.profile.php";
+    require_once "../lib/doctorlocation.php";
+    require_once "../lib/address.php";
+    require_once "../lib/doctorspecialty.php";
+    require_once "../lib/specialtybydocid.php";
 
     /* 
         request data object from the library and add it to the array 
@@ -18,7 +22,11 @@
         post() function used to save new data
         put() function used to save modified data
     */
-    $res = array("data" => specialty\profile\get($_SESSION['idx']));
+    $res = array("data" => doctor\profile\get($_SESSION['idx']),
+                 "doctorlocations" => doctorlocation\get($_SESSION['idx']),
+                 "locations" => address\get($_SESSION['idx']),
+                 "doctorspecialties" => doctorspecialty\get($_SESSION['idx']),
+                 "specialties" => specialtybydocid\get($_SESSION['idx']));
 
     /* Returns the object array in json format. */
     echo json_encode($res);

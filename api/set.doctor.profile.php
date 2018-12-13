@@ -1,43 +1,41 @@
 <?php
-    session_start();
-    require_once "../lib/doctor.profile.php";
-    require_once "../lib/doctorlocation.php";
-    require_once "../lib/doctorspecialty.php";
+    /* 
+        API to set data. This is the part for the front-end and back-end interface. 
+        Objects passed from the front-end are stored in variables and thrown into the back-end library by Argument.
+    */
 
-    $id = $_SESSION['idx'];
+    /* Start the session */
+    session_start();
+
+    /* Add back-end libraries below */
+    require_once '../lib/doctor.profile.php';
+
+    /* 
+        transit data objects from front-end(.js) to the library
+        call function in a library: [namespace]\[function]
+        get() function used to loads data
+        set() function used to create sets
+        post() function used to save new data
+        put() function used to save modified data
+    */
+    $id = $_REQUEST['id'];
     $doctorname = $_REQUEST['doctorname'];
     $suffix = $_REQUEST['suffix'];
-    $phoneno = $_REQUEST['phoneno'];
+    $phoneno = $_REQUEST['phoneNo'];
+    $locations = $_REQUEST['locations'];
+    $specialties = $_REQUEST['specialties'];
 
-    //save doctor's basic information
+    /* 
+        Check whether adding new or modifying existing data to call each function 
+        if id is 0, add a new one -> call post() function in lib folder
+        if id is not 0, modify a exist one -> call put() function in lib folder
+    */
     if($id == '0'){
-        $resDoc = doctor\profile\post($doctorname, $suffix, $phoneno);
+        $res = doctor\profile\post($doctorname, $suffix, $phoneno, $locations, $specialties);
     }else{
-        $resDoc = doctor\profile\put($id, $doctorname, $suffix, $phoneno);
+        $res = doctor\profile\put($id, $doctorname, $suffix, $phoneno, $locations, $specialties);
     }
 
-    //save doctor location
-    $doctorlocation = $_REQUEST['doctorlocation'];
-    $locationid = array();
-    foreach($doctorlocation as $location){
-        array_push($locationid, $location['id']);
-    };
-    $resLoc = doctorlocation\post($id, implode(',', $locationid));
-
-    //save doctor specialty
-    $doctorspecialty = $_REQUEST['doctorspecialty'];
-    $specialtyid = array();
-    foreach($doctorspecialty as $specialty){
-        array_push($specialtyid, $specialty['id']);
-    };
-    $resSpec = doctorspecialty\post($id, implode(',', $specialtyid));
-    
-    
-    $res = array('id' => $resDoc,
-                 'locations' => $resLoc,
-                 'specialty' => $resSpec);
+    /* Returns the object array in json format. */
     echo json_encode($res);
 ?>
-
-
-	

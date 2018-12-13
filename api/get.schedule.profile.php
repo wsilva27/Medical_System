@@ -1,4 +1,7 @@
 <?php
+    /* in progress */
+
+
     /* 
         API to get list. This is the part for the front-end and back-end interface. 
         From this point, each back-end library is imported and placed into the array to be delivered to the front-end. 
@@ -8,7 +11,7 @@
     session_start();
 
     /* Add back-end libraries below */
-    require_once "../lib/specialty.profile.php";
+    require_once "../lib/schedule.profile.php";
 
     /* 
         request data object from the library and add it to the array 
@@ -18,7 +21,7 @@
         post() function used to save new data
         put() function used to save modified data
     */
-    $res = array("data" => specialty\profile\get($_SESSION['idx']));
+    $res = array("data" => schedule\profile\get($_SESSION['idx']));
 
     /* Returns the object array in json format. */
     echo json_encode($res);
