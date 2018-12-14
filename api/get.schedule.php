@@ -23,7 +23,7 @@
         post() function used to save new data
         put() function used to save modified data
     */
-    $res = array("data" => schedule\get());
+    $res = array('data' => schedule\getSchedules());
 
     /* Returns the object array in json format. */
     echo json_encode($res);

@@ -26,7 +26,7 @@
     $city = $_REQUEST['city'];
     $state = $_REQUEST['state'];
     $zip = $_REQUEST['zip'];
-    $phone = $_REQUEST['phone'];
+    $phone = removeSpecialChar($_REQUEST['phone']);
     $email = $_REQUEST['email'];
     $provider = $_REQUEST['provider'];
     $insurance = $_REQUEST['insurance'];
@@ -44,4 +44,10 @@
 
     /* Returns the object array in json format. */
     echo json_encode($res);
+
+
+    function removeSpecialChar($str){
+        return preg_replace("/[ #\&\+\-%@=\/\\\:;,\.'\"\^`~\_|\!\?\*$#<>()\[\]\{\}]/i", "", $str);
+    }
+
 ?>

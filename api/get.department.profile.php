@@ -11,7 +11,7 @@
     require_once '../lib/department.profile.php';
 
     /* 
-        Import a data object from the library and add it to the array 
+        request data object from the library and add it to the array 
         call function in a library: [namespace]\[function]
         get() function used to loads data
         set() function used to create sets
