@@ -18,6 +18,7 @@
                         <thead>
                             <tr>
                                 <th>LOCATION ID</th>
+                                <th>NAME</th>
                                 <th>ADDRESS</th>
                                 <th>CITY</th>
                                 <th>STATE</th>
@@ -29,11 +30,13 @@
                     </table>
                 </div>
             </div>
+<!--
             <div class="row">
                 <div class="col-12 text-right">
                     <button class="btn btn-outline-secondary btn-sm" onclick="loc.new();"><i class="fas fa-map"></i> New</button>
                 </div>
             </div>
+-->
         </div>
         <?php require('../../bottom.php'); ?>
     </body>

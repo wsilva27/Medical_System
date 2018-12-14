@@ -13,6 +13,8 @@
         ?>
         <form id="profile" class="needs-validation" novalidate>
             <div class="offset-2 col-10">
+                <div class="alert alert-info" id="alertinfo" style="display: none;"></div>
+                <div class="alert alert-info" id="errorinfo" style="display: none;"></div>
                 <div class="row">
                     <div class="col-12 text-right">
                         <button class="btn btn-outline-info btn-sm" type="button" onclick="user.save()"><i class="fas fa-save"></i> Save</button>
@@ -22,7 +24,7 @@
                 </div>
 
                 <input type="hidden" id="idx" value="<?php echo $_SESSION['idx']; ?>"/>
-                <div class="row">
+                <div class="form-row">
                     <div class="col-12">
                         <div class="alert alert-info"><i class="fas fa-edit"></i> PERSONAL INFO</div>
                     </div>
@@ -59,7 +61,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="form-row">
                     <div class="col-12">
                         <div class="alert alert-info alert-sm"><i class="fas fa-edit"></i> SYSTEM INFO</div>
                     </div>

@@ -13,11 +13,10 @@
         ?>
         <form id="profile" class="needs-validation" novalidate>
             <div class="offset-2 col-10">
-                <div class="form-row">
-                    <div class="col-9">
-                        <div id="msg" class="alert alert-sm alert-primary" hidden></div>
-                    </div>
-                    <div class="col-3 text-right">
+                <div class="alert alert-info" id="alertinfo" style="display: none;"></div>
+                <div class="alert alert-info" id="errorinfo" style="display: none;"></div>
+                <div class="row">
+                    <div class="col-12 text-right">
                         <button class="btn btn-outline-info btn-sm" type="button" onclick="doctor.save();"><i class="fas fa-save"></i> Save</button>
 <!--                        <button class="btn btn-outline-danger btn-sm" type="button">Remove</button>-->
                         <button class="btn btn-outline-secondary btn-sm" type="button" onclick="window.location='./';"><i class="fas fa-list-ol"></i> List</button>
@@ -43,7 +42,13 @@
                     </div>
                     <div class="col-3">
                         <label for="suffix">SUFFIX</label>
-                        <input type="text" id="suffix" name="suffix" class="form-control" />
+                        <input type="text" id="suffix" name="suffix" class="form-control" required />
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please choose a suffix.
+                        </div>
                     </div>
                 </div>
                 <div class="form-row">

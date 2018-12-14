@@ -30,11 +30,6 @@
                     </table>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-12 text-right">
-                    <button class="btn btn-outline-secondary btn-sm" onclick="user.new();"><i class="fas fa-user-plus"></i> New</button>
-                </div>
-            </div>
         </div>
         <?php require('../../bottom.php'); ?>
     </body>

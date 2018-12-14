@@ -5,7 +5,7 @@
 ?>
 <!DOCTYPE html>
 <html>
-    <?php require('../../header.inc.php') ?>
+    <?php require('../../header.inc.php'); ?>
     <body>
         <?php 
             require('../../nav.php');
@@ -13,6 +13,8 @@
         ?>
         <form id="profile" class="needs-validation" novalidate>
             <div class="offset-2 col-10">
+                <div class="alert alert-info" id="alertinfo" style="display: none;"></div>
+                <div class="alert alert-info" id="errorinfo" style="display: none;"></div>
                 <div class="form-row">
                     <div class="col-12 text-right">
                         <button class="btn btn-outline-info btn-sm" type="button" onclick="specialty.save()"><i class="fas fa-save"></i> Save</button>
@@ -37,11 +39,6 @@
                         <div class="invalid-feedback">
                             Please choose a title of specialty.
                         </div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-12">
-                        <div id="msg" class="alert alert-primary" hidden></div>
                     </div>
                 </div>
             </div>

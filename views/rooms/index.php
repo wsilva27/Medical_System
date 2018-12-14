@@ -19,6 +19,7 @@
                             <tr>
                                 <th>ROOM ID</th>
                                 <th>LOCATION</th>
+                                <th>ADDRESS</th>
                                 <th>ROOM NO</th>
                             </tr>
                         </thead>
@@ -27,11 +28,13 @@
                     </table>
                 </div>
             </div>
+<!--
             <div class="row">
                 <div class="col-12 text-right">
                     <button class="btn btn-outline-secondary btn-sm" type="button" onclick="room.new();"><i class="fas fa-hospital-alt"></i> New</button>
                 </div>
             </div>
+-->
         </div>
         <?php require('../../bottom.php'); ?>
     </body>

@@ -1,7 +1,7 @@
 <?php
     session_start();
     require('../../conf/url.php');
-    $_SESSION['page_name'] = 'patient.profile';
+    $_SESSION['page_name'] = 'schedule.profile';
 ?>
 <!DOCTYPE html>
 <html>
@@ -17,21 +17,23 @@
                 <div class="alert alert-info" id="errorinfo" style="display: none;"></div>
                 <div class="row">
                     <div class="col-12 text-right">
-                        <button class="btn btn-outline-info btn-sm" type="button" onclick="patient.save()"><i class="fas fa-save"></i> Save</button>
+                        <button class="btn btn-outline-info btn-sm" type="button" onclick="schedule.save()"><i class="fas fa-save"></i> Save</button>
 <!--                        <button class="btn btn-outline-danger btn-sm" type="button">Remove</button>-->
                         <button class="btn btn-outline-secondary btn-sm" type="button" onclick="window.location='./';"><i class="fas fa-list-ol"></i> List</button>
                     </div>
                 </div>
 
                 <input type="hidden" id="idx" value="<?php echo $_SESSION['idx']; ?>"/>
+                <input type="hidden" id="patientid" />
+                <input type="hidden" id="doctorid" />
                 <div class="form-row">
                     <div class="col-12">
-                        <div class="alert alert-info"><i class="fas fa-edit"></i> PERSONAL INFO</div>
+                        <div class="alert alert-info"><i class="fas fa-edit"></i> PATIENT INFO</div>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="col-4">
-                        <label for="name">NAME</label>
+                        <label for="name">NAME <i class="fas fa-sync"></i></label>
                         <input type="text" id="name" name="name" class="form-control" required />
                         <div class="valid-feedback">
                             Looks good!
@@ -41,8 +43,8 @@
                         </div>
                     </div>
                     <div class="col-4">
-                        <label for="dob">DOB</label>
-                        <input type="date" id="dob" name="dob" class="form-control" required />
+                        <label for="dob">DOB <i class="fas fa-sync"></i></label>
+                        <input type="date" id="dob" name="dob" class="form-control" required readonly/>
                         <div class="valid-feedback">
                             Looks good!
                         </div>
@@ -50,62 +52,8 @@
                             Please choose a data of birth.
                         </div>
                     </div>
-                    <div class="col-2">
-                        <label for="bloodtype">BLOOD TYPE</label>
-                        <select id="bloodtype" name="bloodtype" class="form-control" required></select>
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
-                        <div class="invalid-feedback">
-                            Please choose a brood type.
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row">
                     <div class="col-4">
-                        <label for="address">ADDRESS</label>
-                        <input type="text" id="address" name="address" class="form-control" required />
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
-                        <div class="invalid-feedback">
-                            Please choose a address.
-                        </div>
-                    </div>
-                    <div class="col-4">
-                        <label for="city">CITY</label>
-                        <input type="text" id="city" name="city" class="form-control" required />
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
-                        <div class="invalid-feedback">
-                            Please choose a data of birth.
-                        </div>
-                    </div>
-                    <div class="col-2">
-                        <label for="state">STATE</label>
-                        <select id="state" name="state" class="form-control" required></select>
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
-                        <div class="invalid-feedback">
-                            Please choose a state.
-                        </div>
-                    </div>
-                    <div class="col-2">
-                        <label for="zip">ZIP</label>
-                        <input type="text" id="zip" name="zip" class="form-control" required />
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
-                        <div class="invalid-feedback">
-                            Please choose a zip.
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-4">
-                        <label for="phone">PHONE</label>
+                        <label for="phone">PHONE <i class="fas fa-sync"></i></label>
                         <input type="text" id="phone" name="phone" class="form-control" required />
                         <div class="valid-feedback">
                             Looks good!
@@ -114,30 +62,58 @@
                             Please choose a phone.
                         </div>
                     </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-12">
+                        <div class="alert alert-info"><i class="fas fa-edit"></i> SCHEDULE INFO</div>
+                    </div>
+                </div>
+                <div class="form-row">
                     <div class="col-4">
-                        <label for="email">EMAIL</label>
-                        <input type="text" id="email" name="email" class="form-control" required />
+                        <label for="doctorname">DOCTOR NAME <i class="fas fa-sync"></i></label>
+                        <input type="text" id="doctorname" name="doctorname" class="form-control" />
                         <div class="valid-feedback">
                             Looks good!
                         </div>
                         <div class="invalid-feedback">
-                            Please choose a email.
+                            Please choose a doctor name.
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <label for="scheduledate">APPOINTMENT DATE</label>
+                        <input type="date" id="scheduledate" name="scheduledate" class="form-control" required />
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please choose a appointment date.
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <label for="scheduletime">APPOINTMENT TIME</label>
+                        <input type="time" id="scheduletime" name="scheduletime" class="form-control" required step="300" />
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please choose a appointment time.
                         </div>
                     </div>
                 </div>
                 <div class="form-row">
-                    <div class="col-12">
-                        <div class="alert alert-info alert-sm"><i class="fas fa-edit"></i> INSURANCE INFO</div>
+                    <div class="col-8">
+                        <label for="location">LOCATION <i class="fas fa-sync"></i></label>
+                        <select id="location" name="location" class="form-control"></select>
+                    </div>
+                    <div class="col-4">
+                        <label for="room">ROOM <i class="fas fa-sync"></i></label>
+                        <select id="room" name="room" class="form-control"></select>
                     </div>
                 </div>
                 <div class="form-row">
-                    <div class="col-6">
-                        <label for="provider">PROVIDER</label>
-                        <select id="provider" name="provider" class="form-control"></select>
-                    </div>
-                    <div class="col-6">
-                        <label for="insurance">INSURANCE #</label>
-                        <input type="text" id="insurance" name="insurance" class="form-control" />
+                    <div class="col-12">
+                        <label for="note">NOTE</label>
+                        <textarea id="note" name="note" class="form-control" rows="5"></textarea>
                     </div>
                 </div>
                 <div class="form-row">

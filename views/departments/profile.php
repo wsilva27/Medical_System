@@ -13,6 +13,8 @@
         ?>
         <form id="profile" class="needs-validation" novalidate>
             <div class="offset-2 col-10">
+                <div class="alert alert-info" id="alertinfo" style="display: none;"></div>
+                <div class="alert alert-info" id="errorinfo" style="display: none;"></div>
                 <div class="form-row">
                     <div class="col-12 text-right">
                         <button class="btn btn-outline-info btn-sm" type="button" onclick="department.save()"><i class="fas fa-save"></i> Save</button>
@@ -29,7 +31,7 @@
                 </div>
                 <div class="form-row">
                     <div class="col-12">
-                        <label for="title">NAME</label>
+                        <label for="name">NAME</label>
                         <input type="text" id="name" name="name" class="form-control" required />
                         <div class="valid-feedback">
                             Looks good!
@@ -41,11 +43,6 @@
                     <div class="col-12">
                         <label for="title">DESCRIPTION</label>
                         <textarea type="text" id="desc" name="desc" rows="3" class="form-control"></textarea>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-12">
-                        <div id="msg" class="alert alert-primary" hidden></div>
                     </div>
                 </div>
             </div>

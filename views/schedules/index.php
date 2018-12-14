@@ -1,7 +1,7 @@
 <?php
     session_start();
     require('../../conf/url.php');
-    $_SESSION['page_name'] = 'specialty';
+    $_SESSION['page_name'] = 'schedule';
 ?>
 <!DOCTYPE html>
 <html>
@@ -17,8 +17,15 @@
                     <table id="table" class="table table-striped">
                         <thead>
                             <tr>
-                                <th>SPECIALTIES ID</th>
-                                <th>SPECIALTIES NAME</th>
+                                <th>SCHEDULE ID</th>
+                                <th>PATIENT NAME</th>
+                                <th>PATIENT DOB</th>
+                                <th>PHONE</th>
+                                <th>SCHEDULE DATE</th>
+                                <th>SCHEDULE TIME</th>
+                                <th>DOCTOR NAME</th>
+                                <th>LOCATION</th>
+                                <th>ROOM NUMBER</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -29,7 +36,7 @@
 <!--
             <div class="row">
                 <div class="col-12 text-right">
-                    <button class="btn btn-outline-secondary btn-sm" onclick="specialty.new();"><i class="fas fa-briefcase-medical"></i> New</button>
+                    <button class="btn btn-outline-secondary btn-sm" onclick="patient.new();"><i class="fas fa-id-card-alt"></i> New</button>
                 </div>
             </div>
 -->
