@@ -1,4 +1,3 @@
-USE MEDICAL4U;
 
 INSERT INTO UserGroups (GROUP_NAME, DESCRIPTION)VALUES 
 ('SysAdmin', 'System Administrator'),
