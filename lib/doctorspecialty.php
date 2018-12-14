@@ -19,15 +19,4 @@ function get($idx){
     $con = null;
     return $res;
 }
-
-function post($idx, $specialtyid){
-    require "../conf/database.php";
-    $sql = 'CALL PostSpecialtyData(:idx, :specialtyid)';
-    $stmt = $con->prepare($sql);
-    $stmt->bindParam(':idx', $idx, PDO::PARAM_INT);
-    $stmt->bindParam(':specialtyid', $specialtyid, PDO::PARAM_STR);
-    $stmt->execute();
-    $con = null;
-    return 'success';  
-}
 ?>

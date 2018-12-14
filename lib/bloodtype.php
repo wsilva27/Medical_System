@@ -7,8 +7,8 @@ function get(){
     $stmt = $con->query($sql);
     while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
         extract($row);
-        $res[] = array("id" => $BLOODTYPE_ID,
-                       "bloodtype" => utf8_encode($BLOODTYPE_NAME));
+        $res[] = array("id" => $BLOOD_TYPE_ID,
+                       "bloodtype" => utf8_encode($BLOOD_TYPE_NAME));
     }
     $con = null;
     return $res;

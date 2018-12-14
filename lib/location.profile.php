@@ -11,6 +11,7 @@ function get($idx){
         extract($row = $stmt->fetch(PDO::FETCH_ASSOC));
         $res= [
             'id' => $idx,
+            'name' => utf8_encode($LOC_NAME),
             'address' => utf8_encode($ADDRESS),
             'city' => utf8_encode($CITY),
             'state' => $STATE,
@@ -20,6 +21,7 @@ function get($idx){
     }else{
         $res= [
             'id' => $idx,
+            'name' => null,
             'address' => null,
             'city' => null,
             'state' => null,
@@ -29,10 +31,11 @@ function get($idx){
     return $res;
 }
 
-function post($address, $city, $state, $zip){
+function post($name, $address, $city, $state, $zip){
     require '../conf/database.php';
-    $sql = 'CALL PostLocation(:city, :state, :address, :zip, @idx);';
+    $sql = 'CALL PostLocation(:name, :city, :state, :address, :zip, @idx);';
     $stmt = $con->prepare($sql);
+    $stmt->bindParam(':name', $name, PDO::PARAM_STR);
     $stmt->bindParam(':address', $address, PDO::PARAM_STR);
     $stmt->bindParam(':city', $city, PDO::PARAM_STR);
     $stmt->bindParam(':state', $state, PDO::PARAM_INT);
@@ -45,11 +48,12 @@ function post($address, $city, $state, $zip){
     return $res;
 }
 
-function put($idx, $address, $city, $state, $zip){
+function put($idx, $name, $address, $city, $state, $zip){
     require '../conf/database.php';
-    $sql = 'CALL PutLocation(:idx, :city, :state, :address, :zip);';
+    $sql = 'CALL PutLocation(:idx, :name, :city, :state, :address, :zip);';
     $stmt = $con->prepare($sql);
     $stmt->bindParam(':idx', $idx, PDO::PARAM_INT);
+    $stmt->bindParam(':name', $name, PDO::PARAM_STR);
     $stmt->bindParam(':city', $city, PDO::PARAM_STR);
     $stmt->bindParam(':state', $state, PDO::PARAM_INT);
     $stmt->bindParam(':address', $address, PDO::PARAM_STR);

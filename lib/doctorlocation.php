@@ -20,14 +20,22 @@ function get($idx){
     return $res;
 }
 
-function post($idx, $locationid){
+function getDoctorLocationById($id){
     require "../conf/database.php";
-    $sql = 'CALL PostLocationData(:idx, :locationid)';
+    $sql = 'CALL GetDoctorLocations(:id)';
     $stmt = $con->prepare($sql);
-    $stmt->bindParam(':idx', $idx, PDO::PARAM_INT);
-    $stmt->bindParam(':locationid', $locationid, PDO::PARAM_STR);
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     $stmt->execute();
+    if($stmt->rowCount() > 0){
+        while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+            extract($row);
+            $res[] = array("id" => $LOC_ID,
+                           "address" => utf8_encode($ADDRESS));
+        }
+    }else{
+        $res = null;
+    }
     $con = null;
-    return 'success';  
+    return $res;
 }
 ?>

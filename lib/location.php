@@ -9,6 +9,7 @@ function get(){
         while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
             extract($row);
             $res[] = array("id" => $ID,
+                           "name" => utf8_encode($LOC_NAME),
                            "address" => utf8_encode($ADDRESS),
                            "city" => utf8_encode($CITY),
                            "state" => utf8_encode($STATE),

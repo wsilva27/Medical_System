@@ -3,11 +3,11 @@ namespace insurance;
 use PDO;
 function get(){
     require "../conf/database.php";
-    $sql = 'CALL GetInsurances()';
+    $sql = 'CALL GetProviders()';
     $stmt = $con->query($sql);
     while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
         extract($row);
-        $res[] = array("id" => $INSURANCE_ID,
+        $res[] = array("id" => $PROVIDER_ID,
                        "provider" => utf8_encode($PROVIDER));
     }
     $con = null;

@@ -13,14 +13,13 @@ function get(){
                            "name" => utf8_encode($PATIENT_NAME),
                            "dob" => utf8_encode($PATIENT_DOB),
                            "address" => utf8_encode($ADDRESS),
-                           "phone" => utf8_encode($PHONE),
+                           "phone" => preg_replace('/(\d{3})(\d{3})(\d{4})$/i', '$1) $2-$3', $PHONE),
                            "insurance" => utf8_encode($PROVIDER));
         }
     }else{
-        $res[] = null;
+        $res = null;
     }
     $con = null;
     return $res;
 }
 ?>
-
