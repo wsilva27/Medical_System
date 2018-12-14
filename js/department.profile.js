@@ -1,59 +1,70 @@
 (function() {
-  'use strict';
-  window.addEventListener('load', function() {
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    var forms = document.getElementsByClassName('needs-validation');
-    // Loop over them and prevent submission
-    var validation = Array.prototype.filter.call(forms, function(form) {
-      form.addEventListener('submit', function(event) {
-        if (form.checkValidity() === false) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-        form.classList.add('was-validated');
-      }, false);
-    });
-  }, false);
+    'use strict';
+    window.addEventListener('load', function() {
+        /* Fetch all the forms we want to apply custom Bootstrap validation styles to */
+        var forms = document.getElementsByClassName('needs-validation');
+        /* Loop over them and prevent submission */
+        var validation = Array.prototype.filter.call(forms, function(form) {
+            form.addEventListener('submit', function(event) {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    }, false);
 })();
 
+/* $(document).ready: jquery's function that gathers the things that need to be run immediately after page loading. */
 $(document).ready( function () {
-    $.ajax({
-        type: 'POST',
-        dataType: 'json',
-        contentType: 'application/json',
-        url: '../../api/get.department.profile.php'
-    }).done(function(res){
+    department.get().then(function(res){
+        /* Assign the returned values to each input box */
         $('#name').val(res.data.name);
         $('#desc').val(res.data.desc);
     });
-
 });
 
 var department = new function(){
+    
+    this.get = function(){
+        /* request a data with json type from the php file in api folder using jquery ajax */
+        return $.ajax({
+                    type: 'POST',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    url: '../../api/get.department.profile.php'
+                }).done(function(res){
+                    return res.data;
+                });
+    };
+    
     this.save = function(){
         if(validator.isNotNull($('#name'))){
+            /* collect data and create dataset to save */
             var param = {
                 id: $('#idx').val(),
                 name: $('#name').val(),
                 desc: $('#desc').val()
             };
+            
+            /* transfer to php file in api folder to save using jquery ajax */
             $.ajax({
                 type: 'POST',
                 dataType: 'json',
                 url: '../../api/set.department.profile.php',
                 data: param
             }).done(function(res){
-                $('#msg').empty();
+                /* popup result message in front-end */ 
                 if($('idx').val() == '0')
-                    $('#msg').append(INSERT_SUCCESS);
+                    $('#alertinfo').html('<i class="fas fa-comments"></i> SYSTEM MESSAGE<br />'+INSERT_SUCCESS).show().fadeOut(5000);
                 else
-                    $('#msg').append(UPDATE_SUCCESS);
-                $('#msg').removeAttr('hidden');
-                setTimeout(function(){ $('#msg').attr('hidden', 'hidden'); }, 3000);
-
+                    $('#alertinfo').html('<i class="fas fa-comments"></i> SYSTEM MESSAGE<br />'+UPDATE_SUCCESS).show().fadeOut(5000);
+                
+                /* contain id into idx field */
                 $('#idx').val(res.id);
             }).fail(function(res){
-                console.log('error');
+                $('#errorinfo').html('<i class="fas fa-comments"></i> SYSTEM INFO<br />'+SYSTEM_ERROR).show().fadeOut(5000);
             });
         }
     };

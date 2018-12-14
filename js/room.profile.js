@@ -45,16 +45,13 @@ var room = new function(){
                 url: '../../api/set.room.profile.php',
                 data: param
             }).done(function(res){
-                $('#msg').empty();
                 if($('idx').val() == '0')
-                    $('#msg').append(INSERT_SUCCESS);
+                    $('#alertinfo').html('<i class="fas fa-comments"></i> SYSTEM MESSAGE<br />'+INSERT_SUCCESS).show().fadeOut(5000);
                 else
-                    $('#msg').append(UPDATE_SUCCESS);
-                $('#msg').removeAttr('hidden');
-                setTimeout(function(){ $('#msg').attr('hidden', 'hidden'); }, 3000);
+                    $('#alertinfo').html('<i class="fas fa-comments"></i> SYSTEM MESSAGE<br />'+UPDATE_SUCCESS).show().fadeOut(5000);
                 $('#idx').val(res.id);
             }).fail(function(res){
-                console.info(res);
+                $('#errorinfo').html('<i class="fas fa-comments"></i> SYSTEM INFO<br />'+SYSTEM_ERROR).show().fadeOut(5000);
             });
         }
     };

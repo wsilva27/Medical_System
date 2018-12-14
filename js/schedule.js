@@ -5,16 +5,20 @@ $(document).ready( function () {
     
     /* Getting data to the datatables */
     schedule.Get().then(function(res){
+        console.log(res.data);
         var table = $('#table').DataTable({
             data: res.data,
             select: true,
             columns: [
-                { data: 'patientid' },
-                { data: 'name' },
-                { data: 'dob' },
-                { data: 'address' },
+                { data: 'id' },
+                { data: 'patientname' },
+                { data: 'patientdob' },
                 { data: 'phone' },
-                { data: 'insurance' }
+                { data: 'scheduledate' },
+                { data: 'scheduletime' },
+                { data: 'doctorname' },
+                { data: 'location' },
+                { data: 'roomnumber'}
             ],
             columnDefs:[
                 {    /* Make certain columns invisible */
@@ -33,7 +37,7 @@ $(document).ready( function () {
         });
 
         /* Add the "New" button to the toolbar at the top of the datatables */
-        $('#table_filter').append('<b><button class="btn btn-sm btn-outline-secondary add" onclick="patient.new();" style="margin-left: 20px;margin-top:-4px;"><i class="fas fa-id-card-alt"></i> New</button></b>');      
+        $('#table_filter').append('<b><button class="btn btn-sm btn-outline-secondary add" onclick="schedule.new();" style="margin-left: 20px;margin-top:-4px;"><i class="fas fa-id-card-alt"></i> New</button></b>');      
 
         /* When the row of the data table is pressed, will be transit to detail page. */
         $('#table tbody').on('click', 'tr', function (){

@@ -16,13 +16,6 @@
   }, false);
 })();
 
-function delete_user(id){
-    var answer = confirm('Are you sure?');
-    if(answer){
-        window.location = 'delete.php?id=' + id;
-    }
-}    
-
 $(document).ready( function () {
     $.ajax({
         type: 'POST',

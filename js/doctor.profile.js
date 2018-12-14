@@ -26,29 +26,21 @@ $(document).ready( function () {
         $('#doctorName').val(res.data.name);
         $('#suffix').val(res.data.suffix);
         $('#phoneNo').val(res.data.phone);
-        setLocation('tblDoctorLocation', 
-                    'tblLocation', 
-                    res.doctorlocations, 
-                    [{ 'data': 'id' }, { 'data': 'address' }]);
-        setLocation('tblLocation', 
-                    'tblDoctorLocation', 
-                    res.locations, 
-                    [{ 'data': 'id' }, { 'data': 'address' }]);
-        setSpecialty('tblDoctorSpecialty', 
-                     'tblSpecialty', 
-                     res.doctorspecialties, 
-                     [{ 'data': 'id' }, { 'data': 'name' }]);
-        setSpecialty('tblSpecialty', 
-                     'tblDoctorSpecialty', 
-                     res.specialties, 
-                     [{ 'data': 'id' }, { 'data': 'name' }]);
+        setDocLocation(res.doctorlocations);
+        setLocation(res.locations);
+        setDocSpecialty(res.doctorspecialties);
+        setSpecialty(res.specialties);
     });
-    
-    var setLocation = function(obj1, obj2, data, cols, param){
-        var table = $('#' + obj1).DataTable({
-            data: data,
+
+    var setDocLocation = function(addr){
+        var events = $('#events');
+        var table = $('#tblDoctorLocation').DataTable({
+            data: addr,
             select: true,
-            columns: cols,
+            columns: [
+                { "data": "id" },
+                { "data": "address" }
+            ],
             scrollY: "230px",
             scrollCollapse: true,
             paging: false,
@@ -59,23 +51,29 @@ $(document).ready( function () {
             }
         });
         table.column(0).visible( false );
-        $('#' + obj1 + '_filter').parent().parent().remove();
-        $('#' + obj1 + ' tbody').on('dblclick', 'tr', function (){
+        $('#tblDoctorLocation_filter').parent().parent().remove();
+        $('#tblDoctorLocation tbody').on('dblclick', 'tr', function (){
             if(table.row(this).index() > -1){
-                $('#' + obj2).DataTable().row.add({
+                $('#tblLocation').DataTable().row.add({
                     id: table.cell(table.row(this).index(), 0).data(),
                     address: table.cell(table.row(this).index(), 1).data()
                 }).draw(false);
                 table.row(this).remove().draw( false );
             }
-        });              
+        });        
     };
-    
-    var setSpecialty = function(obj1, obj2, data, cols, param){
-        var table = $('#' + obj1).DataTable({
-            data: data,
+
+    /* retrieve location data into datatable */
+    var setLocation = function(addr){
+        var events = $('#events');
+        var row = { data: addr};
+        var table = $('#tblLocation').DataTable({
+            data: addr,
             select: true,
-            columns: cols,
+            columns: [
+                { "data": "id" },
+                { "data": "address" }
+            ],
             scrollY: "230px",
             scrollCollapse: true,
             paging: false,
@@ -86,65 +84,135 @@ $(document).ready( function () {
             }
         });
         table.column(0).visible( false );
-        $('#' + obj1 + '_filter').parent().parent().remove();
-        $('#' + obj1 + ' tbody').on('dblclick', 'tr', function (){
+        $('#tblLocation_filter').parent().parent().remove();
+        $('#tblLocation tbody').on('dblclick', 'tr', function (){
+            /* when user double click location info., data will be moved to doctor location table */
             if(table.row(this).index() > -1){
-                $('#' + obj2).DataTable().row.add({
+                $('#tblDoctorLocation').DataTable().row.add({
+                    id: table.cell(table.row(this).index(), 0).data(),
+                    address: table.cell(table.row(this).index(), 1).data()
+                }).draw(false);
+                table.row(this).remove().draw( false );
+            }
+        });
+    };
+    
+    var setDocSpecialty = function(spec){
+        var events = $('#events');
+        var table = $('#tblDoctorSpecialty').DataTable({
+            data: spec,
+            select: true,
+            columns: [
+                { "data": "id" },
+                { "data": "name" }
+            ],
+            scrollY: "230px",
+            scrollCollapse: true,
+            paging: false,
+            responsive: true,
+            bInfo: false,
+            language: {
+                emptyTable: "NO RECORD FOUND"
+            }
+        });
+        table.column(0).visible( false );
+        $('#tblDoctorSpecialty_filter').parent().parent().remove();        
+        $('#tblDoctorSpecialty tbody').on('dblclick', 'tr', function (){
+            if(table.row(this).index() > -1){
+                $('#tblSpecialty').DataTable().row.add({
                     id: table.cell(table.row(this).index(), 0).data(),
                     name: table.cell(table.row(this).index(), 1).data()
                 }).draw(false);
                 table.row(this).remove().draw( false );
             }
-        });              
+        });
     };
-});
     
+    var setSpecialty = function(spec){
+        var events = $('#events');
+        var table = $('#tblSpecialty').DataTable({
+            data: spec,
+            select: true,
+            columns: [
+                { "data": "id" },
+                { "data": "name" }
+            ],
+            scrollY: "230px",
+            scrollCollapse: true,
+            paging: false,
+            responsive: true,
+            bInfo: false,
+            language: {
+                emptyTable: "NO RECORD FOUND"
+            }
+        });
+        table.column(0).visible( false );
+        $('#tblSpecialty_filter').parent().parent().remove();
+        $('#tblSpecialty tbody').on('dblclick', 'tr', function (){
+            if(table.row(this).index() > -1){
+                $('#tblDoctorSpecialty').DataTable().row.add({
+                    id: table.cell(table.row(this).index(), 0).data(),
+                    name: table.cell(table.row(this).index(), 1).data()
+                }).draw(false);
+                table.row(this).remove().draw( false );
+            }
+        });
+    };
+    
+});
+   
 $(document).on('shown.bs.modal', function (e) {
       $.fn.dataTable.tables( {visible: true, api: true} ).columns.adjust();
 });  
 
 var doctor = new function(){
     this.save = function(){
-        if(validator.isNotNull($('#doctorName')) && validator.isPhoneNumber($('#phoneNo'))){
+        if(validator.isNotNull($('#doctorName')) && validator.isNotNull($('#suffix')) && validator.isNotNull($('#phoneNo')) ){
+            /* datatable as variable */
+            var tbldoc = $('#tblDoctorLocation').DataTable();
+            var tblspec = $('#tblDoctorSpecialty').DataTable();
+
+            /* temporary array variable to store ids each datatables */
+            var locs = [];
+            var specs = [];
+
+            /* get ids and set array variable */
+            tbldoc.rows().every(function(){
+                locs.push(this.data().id);
+            });
+            tblspec.rows().every(function(){
+                specs.push(this.data().id);
+            });
+
+            /* set parameter to request to save into database */
             var param = {
                 id: $('#idx').val(),
                 doctorname: $('#doctorName').val(),
                 suffix: $('#suffix').val(),
-                phoneno: $('#phoneNo').val(),
-                doctorlocation: this.getTableData($('#tblDoctorLocation')),
-                doctorspecialty: this.getTableData($('#tblDoctorSpecialty'))
+                phoneNo: $('#phoneNo').val(),
+                locations: locs.toString(),
+                specialties: specs.toString()
             };
+            console.log(param);
+            /* ajax call */
             $.ajax({
                 type: 'POST',
                 dataType: 'json',
                 url: '../../api/set.doctor.profile.php',
                 data: param
             }).done(function(res){
-                console.info(res);
-                $('#msg').empty();
+                console.log(res);
+                /* show message of result */
                 if($('idx').val() == '0')
-                    $('#msg').append(INSERT_SUCCESS);
+                    $('#alertinfo').html('<i class="fas fa-comments"></i> SYSTEM MESSAGE<br />'+INSERT_SUCCESS).show().fadeOut(5000);
                 else
-                    $('#msg').append(UPDATE_SUCCESS);
-                $('#msg').removeAttr('hidden');
-                setTimeout(function(){ $('#msg').attr('hidden', 'hidden'); }, 3000);
+                    $('#alertinfo').html('<i class="fas fa-comments"></i> SYSTEM MESSAGE<br />'+UPDATE_SUCCESS).show().fadeOut(5000);
+
                 $('#idx').val(res.id);
             }).fail(function(res){
-                console.log('error');
+                $('#errorinfo').html('<i class="fas fa-comments"></i> SYSTEM INFO<br />'+SYSTEM_ERROR).show().fadeOut(5000);
             });
         }
     };    
-    
-    this.getTableData = function(obj){
-        var table = obj.DataTable();   
-        var res = [];
-        table.rows().every(function(a){
-            var data = this.data();
-            res.push({ id: data.id});
-        })
-        console.log(res);
-        return res;
-    }
-    
 };
 

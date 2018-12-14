@@ -1,19 +1,19 @@
 (function() {
-  'use strict';
-  window.addEventListener('load', function() {
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    var forms = document.getElementsByClassName('needs-validation');
-    // Loop over them and prevent submission
-    var validation = Array.prototype.filter.call(forms, function(form) {
-      form.addEventListener('submit', function(event) {
-        if (form.checkValidity() === false) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-        form.classList.add('was-validated');
-      }, false);
-    });
-  }, false);
+    'use strict';
+    window.addEventListener('load', function() {
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.getElementsByClassName('needs-validation');
+        // Loop over them and prevent submission
+        var validation = Array.prototype.filter.call(forms, function(form) {
+            form.addEventListener('submit', function(event) {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    }, false);
 })();
 
 $(document).ready( function () {
@@ -30,7 +30,7 @@ $(document).ready( function () {
 
 var specialty = new function(){
     this.save = function(){
-        if(validator.isNotNull($('#title'))){
+        if(validator.isNotNull($('#name'))){
             var param = {
                 id: $('#idx').val(),
                 name: $('#name').val()
@@ -41,16 +41,13 @@ var specialty = new function(){
                 url: '../../api/set.specialty.profile.php',
                 data: param
             }).done(function(res){
-                $('#msg').empty();
                 if($('idx').val() == '0')
-                    $('#msg').append(INSERT_SUCCESS);
+                    $('#alertinfo').html('<i class="fas fa-comments"></i> SYSTEM MESSAGE<br />'+INSERT_SUCCESS).show().fadeOut(5000);
                 else
-                    $('#msg').append(UPDATE_SUCCESS);
-                $('#msg').removeAttr('hidden');
-                setTimeout(function(){ $('#msg').attr('hidden', 'hidden'); }, 3000);
+                    $('#alertinfo').html('<i class="fas fa-comments"></i> SYSTEM MESSAGE<br />'+UPDATE_SUCCESS).show().fadeOut(5000);
                 $('#idx').val(res.id);
             }).fail(function(res){
-                console.info(res);
+                $('#errorinfo').html('<i class="fas fa-comments"></i> SYSTEM INFO<br />'+SYSTEM_ERROR).show().fadeOut(5000);
             });
         }
     };

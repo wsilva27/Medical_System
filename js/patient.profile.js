@@ -16,13 +16,6 @@
   }, false);
 })();
 
-function delete_user(id){
-    var answer = confirm('Are you sure?');
-    if(answer){
-        window.location = 'delete.php?id=' + id;
-    }
-}    
-
 $(document).ready( function () {
     $.ajax({
         type: 'POST',
@@ -37,7 +30,7 @@ $(document).ready( function () {
         $('#zip').val(res.data.zip);
         $('#phone').val(res.data.phone);
         $('#email').val(res.data.email);
-        $('#pcp').val(res.data.pcp);
+        $('#insurance').val(res.data.insurance);
 
         res.bloodtypes.forEach(function(bloodtype){
             $('#bloodtype').append(new Option(bloodtype.bloodtype, bloodtype.id));
@@ -52,8 +45,49 @@ $(document).ready( function () {
         res.insurances.forEach(function(insurance){
             $('#provider').append(new Option(insurance.provider, insurance.id));
         });
-        $('#provider option[value=' + res.data.insurance + ']').attr('selected', 'selected');
+        $('#provider option[value=' + res.data.provider + ']').attr('selected', 'selected');
 
     });
 
 });
+
+var patient = new function(){
+    this.save = function(){
+        if(validator.isNotNull($('#name')) && validator.isNotNull($('#dob')) && validator.isNotNull($('#address')) && 
+           validator.isNotNull($('#city')) && validator.isNotNull($('#zip'))){
+            /* set parameter to request to save into database */
+            var param = {
+                idx: $('#idx').val(),
+                name: $('#name').val(),
+                dob: $('#dob').val(),
+                bloodtype: $('#bloodtype').val(),
+                address: $('#address').val(),
+                city: $('#city').val(),
+                state: $('#state').val(),
+                zip: $('#zip').val(),
+                phone: $('#phone').val(),
+                email: $('#email').val(),
+                provider: $('#provider').val(),
+                insurance: $('#insurance').val()
+            };
+            /* ajax call */
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: '../../api/set.patient.profile.php',
+                data: param
+            }).done(function(res){
+                if($('idx').val() == '0')
+                    $('#alertinfo').html('<i class="fas fa-comments"></i> SYSTEM MESSAGE<br />'+INSERT_SUCCESS).show().fadeOut(5000);
+                else
+                    $('#alertinfo').html('<i class="fas fa-comments"></i> SYSTEM MESSAGE<br />'+UPDATE_SUCCESS).show().fadeOut(5000);
+                $('#idx').val(res.id);
+
+                $('#idx').val(res.id);
+            }).fail(function(res){
+                $('#errorinfo').html('<i class="fas fa-comments"></i> SYSTEM INFO<br />'+SYSTEM_ERROR).show().fadeOut(5000);
+            });
+        }
+    };    
+};
+

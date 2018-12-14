@@ -51,6 +51,8 @@ $(document).ready( function () {
     
 });
 
+
+
 var patient = new function(){
     
     /* Getting data from php in api folder using jQuery.ajax */
