@@ -1,11 +1,9 @@
--- CREATE DATABASE MEDICAL4U;
 USE MEDICAL4U;
 
 INSERT INTO UserGroups (GROUP_NAME, DESCRIPTION)VALUES 
 ('SysAdmin', 'System Administrator'),
 ('Admin', 'Administrator'),
 ('User', 'Employee');
-
 
 INSERT INTO Departments (DEPT_NAME, DESCRIPTION) VALUES 
 ('Advanced Practice', 'Take your skills to the next level. Enjoy greater autonomy and opportunity.'),
@@ -17,7 +15,6 @@ INSERT INTO Departments (DEPT_NAME, DESCRIPTION) VALUES
 ('Nursing', 'As a cornerstone of the health care team, you’ll offer the very best care to your patients in award winning hospitals and facilities.'),
 ('Physicians', 'Elevate your practice with some of the world’s most respected and renowned doctors.'),
 ('Research', 'Discover tomorrow’s medical breakthroughs working at the Feinstein Institute for Medical Research.');
-
 
 INSERT INTO Users (FIRST_NAME, LAST_NAME, DEPT_ID, USER_NAME, USER_PASSWORD, USER_GROUP) VALUES
 ('sysadmin', 'sysadmin', 4, 'sysadmin', SHA('sysadmin1234'), 1),
@@ -86,7 +83,6 @@ INSERT INTO Users (FIRST_NAME, LAST_NAME, DEPT_ID, USER_NAME, USER_PASSWORD, USE
 ('WI', 'Wisconsin'),
 ('WY', 'Wyoming');
 
-
 INSERT INTO SPECIALTIES (SPECIALTIES_NAME) VALUES
 ('Anesthesiology'),
 ('Cardiothoracic Surgery'),
@@ -129,7 +125,6 @@ INSERT INTO SPECIALTIES (SPECIALTIES_NAME) VALUES
 ('Urology'),
 ('Vascular Surgery');
 
-
 INSERT INTO Locations (LOC_NAME, CITY, STATE_ID, ADDRESS, ZIP) VALUES
 ('NYU Langone Medical Associates', 'New York', 37, '196 Canal St', '10013'),
 ('NewYork-Presbyterian Lower', 'New York', 37, '170 William St', '10038'),
@@ -139,7 +134,6 @@ INSERT INTO Locations (LOC_NAME, CITY, STATE_ID, ADDRESS, ZIP) VALUES
 ('NYC Health Hospital-Elmhurst', 'Elmhurst', 37, '79-01 Broadway', '11373'),
 ('Long Island Jewish Forest Hills', 'Forest Hills', 37, '102-01 66th Rd', '11375'),
 ('Northwell Health', 'Queens', 37, '270-05 76th Ave', '11040');
-
 
 INSERT INTO Rooms (LOC_ID, ROOM_NUMBER) VALUES
 (1, '1A'),
@@ -158,9 +152,7 @@ INSERT INTO Rooms (LOC_ID, ROOM_NUMBER) VALUES
 (4, '102-C');
 
 
-
 INSERT INTO Doctors (DOC_NAME, DOC_PHONE, SUFFIX) VALUES 
--- ('Michael Overby', '(516) 569-4709', 'MD'),
 ('Martin Blaser', '(646) 501-4386', 'MD'),
 ('Jose U Scher', '(646) 501-7400', 'MD'),
 ('John G. Golfinos', '(212) 263-2950', 'MD'),
@@ -175,16 +167,13 @@ INSERT INTO Doctors (DOC_NAME, DOC_PHONE, SUFFIX) VALUES
 ('Joseph W. Dryer', '(646) 501-7200', 'MD'),
 ('Yong H. Kim', '(212) 427-3986', 'MD');
 
-
 INSERT INTO DoctorLocations (DOC_ID, LOC_ID) VALUES
 (1, 1),
 (1, 4),
 (1, 5);
 
-
 INSERT INTO DoctorSpecialties (DOC_ID, SPECIALTIES_ID) VALUES
 (1, 1), (1, 3), (1, 5);
-
 
 INSERT INTO BloodTypes (BLOOD_TYPE_NAME) VALUES
 ('Unknown'), ('RH+ A'), ('RH- A'), ('RH+ B'), ('RH- B'), ('RH+ AB'), ('RH- AB'), ('RH+ O'), ('RH- O');
