@@ -31,11 +31,11 @@ function get($idx){
     return $res;
 }
 
-function isAvailable($username){
+function isAvailable($username_){
     require "../conf/database.php";
     $sql = 'CALL IsAvailableUserName(:username);';
     $stmt = $con->prepare($sql);
-    $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+    $stmt->bindParam(':username', $username_, PDO::PARAM_STR);
     $stmt->execute();
     extract($row = $stmt->fetch(PDO::FETCH_ASSOC));
     $res= [
@@ -45,11 +45,11 @@ function isAvailable($username){
     return $res;
 }
 
-function matchPassword($username, $pwd){
+function matchPassword($username_, $pwd){
     require "../conf/database.php";
     $sql = 'CALL MatchPassword(:username, :pwd);';
     $stmt = $con->prepare($sql);
-    $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+    $stmt->bindParam(':username', $username_, PDO::PARAM_STR);
     $stmt->bindParam(':pwd', $pwd, PDO::PARAM_STR);
     $stmt->execute();
     extract($row = $stmt->fetch(PDO::FETCH_ASSOC));
@@ -60,14 +60,14 @@ function matchPassword($username, $pwd){
     return $res;
 }
 
-function post($firstname, $lastname, $deptid, $username, $usergroup){
+function post($firstname, $lastname, $deptid, $username_, $usergroup){
     require '../conf/database.php';
     $sql = 'CALL PostUser(:firstname, :lastname, :deptid, :username, :usergroup, @idx);';
     $stmt = $con->prepare($sql);
     $stmt->bindParam(':firstname', $firstname, PDO::PARAM_STR);
     $stmt->bindParam(':lastname', $lastname, PDO::PARAM_STR);
     $stmt->bindParam(':deptid', $deptid, PDO::PARAM_INT);
-    $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+    $stmt->bindParam(':username', $username_, PDO::PARAM_STR);
     $stmt->bindParam(':usergroup', $usergroup, PDO::PARAM_INT);
     $stmt->execute();
     $stmt->closeCursor();
@@ -77,7 +77,7 @@ function post($firstname, $lastname, $deptid, $username, $usergroup){
     return $res;
 }
 
-function put($id, $firstname, $lastname, $deptid, $username, $usergroup){
+function put($id, $firstname, $lastname, $deptid, $username_, $usergroup){
     require '../conf/database.php';
     $sql = 'CALL PutUser(:id, :firstname, :lastname, :deptid, :username, :usergroup);';
     $stmt = $con->prepare($sql);
@@ -85,7 +85,7 @@ function put($id, $firstname, $lastname, $deptid, $username, $usergroup){
     $stmt->bindParam(':firstname', $firstname, PDO::PARAM_STR);
     $stmt->bindParam(':lastname', $lastname, PDO::PARAM_STR);
     $stmt->bindParam(':deptid', $deptid, PDO::PARAM_INT);
-    $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+    $stmt->bindParam(':username', $username_, PDO::PARAM_STR);
     $stmt->bindParam(':usergroup', $usergroup, PDO::PARAM_INT);
     $stmt->execute();
     $res = [ 'id' => $id];
