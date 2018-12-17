@@ -25,6 +25,9 @@ $(document).ready( function () {
         /* implement autocomplete with ajax */ 
         $('#doctorname').autocomplete({
             source: function(req, response){
+                $('#doctorid').val('');                
+                $('#location').children().remove();
+                $('#room').children().remove();
                 doctor.get(req.term).then(function(data){
                     try{
                         response($.map(data[0], function(item){
@@ -118,6 +121,9 @@ $(function(){
     /* implement autocomplete with ajax */ 
     $('#name').autocomplete({
         source: function(req, res){
+            $('#patientid').val('');
+            $('#dob').val('');
+            $('#phone').val('');
             patient.getByName(req.term).then(function(data){
                 try{
                     res($.map(data[0], function(item){
@@ -145,6 +151,9 @@ $(function(){
 
     $('#phone').autocomplete({
         source: function(req, res){
+            $('#patientid').val('');
+            $('#dob').val('');
+            $('#phone').val('');
             patient.getByPhone(req.term).then(function(data){
                 try{
                     res($.map(data[0], function(item){
@@ -201,9 +210,19 @@ var schedule = new function(){
                 });
     };
     
-    this.save = function(){
-        if(validator.isNotNull($('#name')) && validator.isNotNull($('#dob')) && validator.isNotNull($('#phone')) && 
-           validator.isNotNull($('#doctorname')) && validator.isNotNull($('#scheduledate')) && validator.isNotNull($('#scheduletime'))){
+    this.save = function(){ //validator.isNotNull($('#name')) && 
+        console.log($('#patientid').val());
+        var isValid = true;
+        if(!validator.isNotNull($('#dob'))) isValid = false;
+        if(!validator.isNotNull($('#phone'))) isValid = false;
+        if(!validator.isNotNull($('#name'))) isValid = false;
+        if(!($('#patientid').val().length != 0 ? true : validator.makeError($('#name')))) isValid = false;
+        if(!validator.isNotNull($('#doctorname'))) isValid = false;
+        if(!($('#doctorid').val().length != 0 ? true : validator.makeError($('#doctorname')))) isValid = false;
+        if(!validator.isNotNull($('#scheduledate'))) isValid = false;
+        if(!validator.isNotNull($('#scheduledate'))) isValid = false;
+        if(!validator.isNotNull($('#scheduletime'))) isValid = false;
+        if(isValid){
             /* set parameter to request to save into database */
             var param = {
                 idx: $('#idx').val(),
@@ -211,9 +230,12 @@ var schedule = new function(){
                 doctorid: $('#doctorid').val(),
                 scheduledate: $('#scheduledate').val(),
                 scheduletime: $('#scheduletime').val(),
+                location: $('#location').val(),
                 room: $('#room').val(),
                 schedulenotes: $('#note').val()
             };
+            console.log(param);
+            
             /* ajax call */
             $.ajax({
                 type: 'POST',
@@ -259,6 +281,7 @@ var patient = new function() {
                     return res;
                 });        
     };
+    
 }
 
 var doctor = new function(){

@@ -26,5 +26,19 @@ var validator = new function(){
             return true;
         }
         
-    }
+    };
+    
+    this.makeError = function(obj){
+        obj.removeClass('is-invalid');
+        obj.removeClass('is-valid');
+        obj.addClass('is-invalid');
+        return false;
+    };
+    
+    this.exist = function(obj){
+        obj.removeClass('is-invalid');
+        obj.removeClass('is-valid');
+        obj.addClass('is-invalid');
+        return false;
+    };
 };

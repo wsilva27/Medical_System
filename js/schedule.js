@@ -5,7 +5,6 @@ $(document).ready( function () {
     
     /* Getting data to the datatables */
     schedule.Get().then(function(res){
-        console.log(res.data);
         var table = $('#table').DataTable({
             data: res.data,
             select: true,
@@ -61,17 +60,14 @@ var schedule = new function(){
     /* "$." is equal to "jquery." */
     this.Get = function () {
         return $.ajax({
-                    method: 'POST',
+                    type: 'POST',
                     dataType: 'json',
-                    url: '../../api/get.schedule.php',
-                    contentType: 'application/json',
-                    success: function(data, textStatus, jQxhr){
-                        return data;
-                    },
-                    error: function(jQxhr, textStatus, errorThrown){
-                        console.log(errorThrown);
-                    }
-        });
+                    url: '../../api/get.schedule.php'
+                }).done(function(res){
+                     return res;
+                }).fail(function(res){
+                    console.log(res);
+                });   
     };    
 
     /* When creating new details, set the ID value to 0 in the session and hand it over to the detail screen */
