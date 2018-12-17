@@ -21,7 +21,7 @@ $(document).ready( function () {
         type: 'POST',
         dataType: 'json',
         contentType: 'application/json',
-        url: '../../api/get.location.profile.php'
+        url: base_URL + 'api/get.location.profile.php'
     }).done(function(res){
         console.log(res);
         $('#name').val(res.data.name);
@@ -53,7 +53,7 @@ var loc = new function(){
             $.ajax({
                 type: 'POST',
                 dataType: 'json',
-                url: '../../api/set.location.profile.php',
+                url: base_URL + 'api/set.location.profile.php',
                 data: param
             }).done(function(res){
                 if($('idx').val() == '0')

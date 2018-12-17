@@ -21,7 +21,7 @@ $(document).ready( function () {
         type: 'POST',
         dataType: 'json',
         contentType: 'application/json',
-        url: '../../api/get.specialty.profile.php'
+        url: base_URL + 'api/get.specialty.profile.php'
     }).done(function(res){
         $('#name').val(res.data.name);
     });
@@ -38,7 +38,7 @@ var specialty = new function(){
             $.ajax({
                 type: 'POST',
                 dataType: 'json',
-                url: '../../api/set.specialty.profile.php',
+                url: base_URL + 'api/set.specialty.profile.php',
                 data: param
             }).done(function(res){
                 if($('idx').val() == '0')

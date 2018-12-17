@@ -33,7 +33,7 @@ var department = new function(){
                     type: 'POST',
                     dataType: 'json',
                     contentType: 'application/json',
-                    url: '../../api/get.department.profile.php'
+                    url: base_URL + 'api/get.department.profile.php'
                 }).done(function(res){
                     return res.data;
                 });
@@ -52,7 +52,7 @@ var department = new function(){
             $.ajax({
                 type: 'POST',
                 dataType: 'json',
-                url: '../../api/set.department.profile.php',
+                url: base_URL + 'api/set.department.profile.php',
                 data: param
             }).done(function(res){
                 /* popup result message in front-end */ 

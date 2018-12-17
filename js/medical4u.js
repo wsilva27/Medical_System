@@ -21,10 +21,11 @@ var secure = new function(){
     };
     
     this.tryLogin = function(req){
+        console.log(base_URL);
         return $.ajax({
                     type: 'POST',
                     dataType: 'json',
-                    url: '../../api/set.secure.login.php',
+                    url: base_URL + 'api/set.secure.login.php',
                     data: req
                 }).done(function(res){
                     return res;
@@ -37,7 +38,7 @@ var secure = new function(){
         return $.ajax({
                     type: 'POST',
                     dataType: 'json',
-                    url: '../../api/get.secure.login.php'
+                    url: base_URL + 'api/get.secure.login.php'
                 }).done(function(res){
                     return res;
                 }).fail(function(res){
@@ -49,11 +50,11 @@ var secure = new function(){
         return $.ajax({
                     type: 'POST',
                     dataType: 'json',
-                    url: '../../api/remove.login.php'
+                    url: base_URL + 'api/remove.login.php'
                 }).done(function(res){
                     $('#userinfo').hide();
                     $('#login-window').show();
-                    window.location.href='/index.php';
+                    window.location.href=base_URL + 'index.php';
                 }).fail(function(res){
                     return res;
                 });   
@@ -99,7 +100,7 @@ var checkLogin = function(){
             $('#userinfo_group').html('<sub>' + o.groupname + '</sub>');
             $('#login-window').hide();
             if(window.location.href.indexOf('views') < 0)
-                window.location.href="/views/schedules/index.php";
+                window.location.href= base_URL + 'views/schedules/index.php';
             if(o.groupname != 'User')
                 addAdminMenu();
             return true;
@@ -153,7 +154,7 @@ var addAdminMenu = function(){
 var myProfile = function(){
     secure.getLoginInfo().then(function(o){    
         /* Save the ID value in the session and move it to the detailed screen */
-        $.post('../../api/set.session.php', { idx: o.userid })
+        $.post(base_URL + 'api/set.session.php', { idx: o.userid })
             .done(function(data){
                 window.location = base_URL + 'views/users/profile.php';
             });    

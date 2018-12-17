@@ -21,7 +21,7 @@ $(document).ready( function () {
         type: 'POST',
         dataType: 'json',
         contentType: 'application/json',
-        url: '../../api/get.user.profile.php'
+        url: base_URL + 'api/get.user.profile.php'
     }).done(function(res){
         secure.getLoginInfo().then(function(currentUser){
             $('#idx').val(res.data.userid);
@@ -97,7 +97,7 @@ var user = new function(){
         $.ajax({
             type: 'POST',
             dataType: 'json',
-            url: '../../api/set.user.profile.php',
+            url: base_URL + 'api/set.user.profile.php',
             data: param
         }).done(function(res){
             /* show message of result */
@@ -121,7 +121,7 @@ var user = new function(){
         return  $.ajax({
                     type: 'POST',
                     dataType: 'json',
-                    url: '../../api/get.user.profile.isavailable.php',
+                    url: base_URL + 'api/get.user.profile.isavailable.php',
                     data: param
                 }).done(function(res){
                     return res;
@@ -141,7 +141,7 @@ var user = new function(){
         $.ajax({
             type: 'POST',
             dataType: 'json',
-            url: '../../api/get.user.profile.matchpassword.php',
+            url: base_URL + 'api/get.user.profile.matchpassword.php',
             data: param
         }).done(function(res){
             return res;

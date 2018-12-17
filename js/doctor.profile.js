@@ -21,7 +21,7 @@ $(document).ready( function () {
         type: 'POST',
         dataType: 'json',
         contentType: 'application/json',
-        url: '../../api/get.doctor.profile.php'
+        url: base_URL + 'api/get.doctor.profile.php'
     }).done(function(res){
         $('#doctorName').val(res.data.name);
         $('#suffix').val(res.data.suffix);
@@ -198,7 +198,7 @@ var doctor = new function(){
             $.ajax({
                 type: 'POST',
                 dataType: 'json',
-                url: '../../api/set.doctor.profile.php',
+                url: base_URL + 'api/set.doctor.profile.php',
                 data: param
             }).done(function(res){
                 console.log(res);

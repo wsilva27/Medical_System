@@ -21,7 +21,7 @@ $(document).ready( function () {
         type: 'POST',
         dataType: 'json',
         contentType: 'application/json',
-        url: '../../api/get.room.profile.php'
+        url: base_URL + 'api/get.room.profile.php'
     }).done(function(res){
         $('#roomno').val(res.data.roomno);
         res.locations.forEach(function(location){
@@ -42,7 +42,7 @@ var room = new function(){
             $.ajax({
                 type: 'POST',
                 dataType: 'json',
-                url: '../../api/set.room.profile.php',
+                url: base_URL + 'api/set.room.profile.php',
                 data: param
             }).done(function(res){
                 if($('idx').val() == '0')

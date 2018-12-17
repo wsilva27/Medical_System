@@ -21,7 +21,7 @@ $(document).ready( function () {
         type: 'POST',
         dataType: 'json',
         contentType: 'application/json',
-        url: '../../api/get.patient.profile.php'
+        url: base_URL + 'api/get.patient.profile.php'
     }).done(function(res){
         $('#name').val(res.data.name);
         $('#dob').val(res.data.dob);
@@ -74,7 +74,7 @@ var patient = new function(){
             $.ajax({
                 type: 'POST',
                 dataType: 'json',
-                url: '../../api/set.patient.profile.php',
+                url: base_URL + 'api/set.patient.profile.php',
                 data: param
             }).done(function(res){
                 if($('idx').val() == '0')

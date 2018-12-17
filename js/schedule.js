@@ -45,7 +45,7 @@ $(document).ready( function () {
             /* Gets the ID of the data from the row */
             var no = table.cell(idx, 0).data();
             /* Save the ID value in the session and move it to the detailed screen */
-            $.post('../../api/set.session.php', { idx: no })
+            $.post(base_URL + 'api/set.session.php', { idx: no })
                 .done(function(data){
                     window.location='./profile.php';
                 });
@@ -62,7 +62,7 @@ var schedule = new function(){
         return $.ajax({
                     type: 'POST',
                     dataType: 'json',
-                    url: '../../api/get.schedule.php'
+                    url: base_URL + 'api/get.schedule.php'
                 }).done(function(res){
                      return res;
                 }).fail(function(res){
@@ -72,7 +72,7 @@ var schedule = new function(){
 
     /* When creating new details, set the ID value to 0 in the session and hand it over to the detail screen */
     this.new = function(){
-        $.post('../../api/set.session.php', { idx: '0' })
+        $.post(base_URL + 'api/set.session.php', { idx: '0' })
             .done(function(data){
                 window.location='./profile.php';
             });

@@ -186,7 +186,7 @@ var docloc = new function(){
         return $.ajax({
                     dataType: 'json',
                     type: 'POST',
-                    url: '../../api/get.doctorlocation.php',
+                    url: base_URL + 'api/get.doctorlocation.php',
                     data: { id: req },
                     success: function(res){
                         return res;
@@ -204,7 +204,7 @@ var schedule = new function(){
                     type: 'POST',
                     dataType: 'json',
                     contentType: 'application/json',
-                    url: '../../api/get.schedule.profile.php'
+                    url: base_URL + 'api/get.schedule.profile.php'
                 }).done(function(res){
                     return res;
                 });
@@ -240,7 +240,7 @@ var schedule = new function(){
             $.ajax({
                 type: 'POST',
                 dataType: 'json',
-                url: '../../api/set.schedule.profile.php',
+                url: base_URL + 'api/set.schedule.profile.php',
                 data: param
             }).done(function(res){
                 /* show message of result */
@@ -264,7 +264,7 @@ var patient = new function() {
                     dataType: 'json',
                     //contentType: 'application/json',
                     data: {search: str},
-                    url: '../../api/get.patient.profilebyname.php'
+                    url: base_URL + 'api/get.patient.profilebyname.php'
                 }).done(function(res){
                     return res;
                 });        
@@ -276,7 +276,7 @@ var patient = new function() {
                     dataType: 'json',
                     //contentType: 'application/json',
                     data: {search: str},
-                    url: '../../api/get.patient.profilebyphone.php'
+                    url: base_URL + 'api/get.patient.profilebyphone.php'
                 }).done(function(res){
                     return res;
                 });        
@@ -290,7 +290,7 @@ var doctor = new function(){
                     dataType: 'json',
                     type: 'POST',
                     //contentType: 'application/json',
-                    url: '../../api/get.doctor.profilebyname.php',
+                    url: base_URL + 'api/get.doctor.profilebyname.php',
                     data: { search: req }
                 }).done(function(res){
                     return res;
@@ -305,7 +305,7 @@ var room = new function(){
                     type: 'POST',
                     //contentType: 'application/json',
                     data: {id: req},
-                    url: '../../api/get.roombylocid.php'
+                    url: base_URL + 'api/get.roombylocid.php'
                 }).done(function(res){
                     return res;
                 });
