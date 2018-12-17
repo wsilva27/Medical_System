@@ -20,11 +20,10 @@ INSERT INTO Departments (DEPT_NAME, DESCRIPTION) VALUES
 
 
 INSERT INTO Users (FIRST_NAME, LAST_NAME, DEPT_ID, USER_NAME, USER_PASSWORD, USER_GROUP) VALUES
-('admin', 'admin', 4, 'admin', SHA('1234'), 1),
-('Bruce', 'Frederick', 8, 'b.frederick', SHA('1234'), 3),
-('Kathleen', 'Gallo', 7, 'k.gallo', SHA('1234'), 3),
-('Iris', 'Berman', 6, 'i.berman', SHA('1234'), 2);   
-
+('sysadmin', 'sysadmin', 4, 'admin', SHA('sysadmin1234'), 1),
+('user1', 'user1', 8, 'user1', SHA('user11234'), 3),
+('user2', 'user2', 8, 'user2', SHA('user21234'), 3),
+('admin', 'admin', 6, 'admin', SHA('admin1234'), 2);   
 
  INSERT INTO STATES (`CODE`, `NAME`) VALUES
 ('AL', 'Alabama'),
