@@ -8,7 +8,7 @@
     session_start();
 
     /* Add back-end libraries below */
-    require_once '../lib/schedule.profile.php';
+    require_once '../lib/user.profile.php';
 
     /* 
         transit data objects from front-end(.js) to the library
@@ -19,13 +19,11 @@
         put() function used to save modified data
     */
     $id = $_REQUEST['idx'];
-    $patientid = $_REQUEST['patientid'];
-    $doctorid = $_REQUEST['doctorid'];
-    $scheduledate = $_REQUEST['scheduledate'];
-    $scheduletime = $_REQUEST['scheduletime'];
-    $locid = $_REQUEST['location'] == 'null' ? null : $_REQUEST['location'];
-    $roomid = $_REQUEST['room'] == 'null' ? null : $_REQUEST['room'];
-    $note = $_REQUEST['schedulenotes'];
+    $firstname = $_REQUEST['firstname'];
+    $lastname = $_REQUEST['lastname'];
+    $deptid = $_REQUEST['department'];
+    $username = $_REQUEST['username'];
+    $usergroup = $_REQUEST['usergroup'];
 
     /* 
         Check whether adding new or modifying existing data to call each function 
@@ -33,9 +31,9 @@
         if id is not 0, modify a exist one -> call put() function in lib folder
     */
     if($id == '0'){
-        $res = schedule\profile\post($patientid, $doctorid, $scheduledate, $scheduletime, $locid, $roomid, $note);
+        $res = user\profile\post($firstname, $lastname, $deptid, $username, $usergroup);
     }else{
-        $res = schedule\profile\put($id, $patientid, $doctorid, $scheduledate, $scheduletime, $locid, $roomid, $note);
+        $res = user\profile\put($id, $firstname, $lastname, $deptid, $username, $usergroup);
     }
 
     /* Returns the object array in json format. */
