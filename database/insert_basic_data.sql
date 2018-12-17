@@ -1,3 +1,5 @@
+-- CREATE DATABASE MEDICAL4U;
+USE MEDICAL4U;
 
 INSERT INTO UserGroups (GROUP_NAME, DESCRIPTION)VALUES 
 ('SysAdmin', 'System Administrator'),
@@ -18,7 +20,7 @@ INSERT INTO Departments (DEPT_NAME, DESCRIPTION) VALUES
 
 
 INSERT INTO Users (FIRST_NAME, LAST_NAME, DEPT_ID, USER_NAME, USER_PASSWORD, USER_GROUP) VALUES
-('Ted', 'Kim', 4, 'blacksmilez', SHA('1234'), 1),
+('admin', 'admin', 4, 'admin', SHA('1234'), 1),
 ('Bruce', 'Frederick', 8, 'b.frederick', SHA('1234'), 3),
 ('Kathleen', 'Gallo', 7, 'k.gallo', SHA('1234'), 3),
 ('Iris', 'Berman', 6, 'i.berman', SHA('1234'), 2);   
