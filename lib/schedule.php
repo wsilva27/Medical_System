@@ -15,7 +15,7 @@ function getSchedules(){
                            'scheduletime' => $SCHEDULE_TIME,
                            'patientdob' => $PATIENT_DOB,
                            'phone' => preg_replace('/(\d{3})(\d{3})(\d{4})$/i', '$1) $2-$3', $PHONE),
-                           'doctorname' => utf8_encode($DOC_NAME),
+                           'doctorname' => $DOC_NAME,
                            'location' => utf8_encode($LOC_NAME),
                            'roomnumber' => utf8_encode($ROOM_NUMBER));
         }

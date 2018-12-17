@@ -43,9 +43,9 @@ function get($idx){
     return $res;
 }
 
-function post($patientid, $doctorid, $scheduledate, $scheduletime, $roomid, $note){
+function post($patientid, $doctorid, $scheduledate, $scheduletime, $locid, $roomid, $note){
     require "../conf/database.php";
-    $sql = 'CALL PostSchedule(:patientid, :doctorid, :scheduledate, :scheduletime, :roomid, :note, @idx);';
+    $sql = 'CALL PostSchedule(:patientid, :doctorid, :scheduledate, :scheduletime, :locid, :roomid, :note, @idx);';
     $stmt = $con->prepare($sql);
 //    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     $stmt->bindParam(':patientid', $patientid, PDO::PARAM_INT);
@@ -53,6 +53,7 @@ function post($patientid, $doctorid, $scheduledate, $scheduletime, $roomid, $not
     $stmt->bindParam(':scheduledate', $scheduledate, PDO::PARAM_STR);
     $stmt->bindParam(':scheduletime', $scheduletime, PDO::PARAM_STR);
     $stmt->bindParam(':roomid', $roomid, PDO::PARAM_INT);
+    $stmt->bindParam(':locid', $locid, PDO::PARAM_INT);
     $stmt->bindParam(':note', $note, PDO::PARAM_STR);
     $stmt->execute();
     $stmt->closeCursor();
@@ -63,15 +64,16 @@ function post($patientid, $doctorid, $scheduledate, $scheduletime, $roomid, $not
 }
 
 
-function put($id, $patientid, $doctorid, $scheduledate, $scheduletime, $roomid, $note){
+function put($id, $patientid, $doctorid, $scheduledate, $scheduletime, $locid, $roomid, $note){
     require "../conf/database.php";
-    $sql = 'CALL PutSchedule(:id, :patientid, :doctorid, :scheduledate, :scheduletime, :roomid, :note);';
+    $sql = 'CALL PutSchedule(:id, :patientid, :doctorid, :scheduledate, :scheduletime, :locid, :roomid, :note);';
     $stmt = $con->prepare($sql);
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     $stmt->bindParam(':patientid', $patientid, PDO::PARAM_INT);
     $stmt->bindParam(':doctorid', $doctorid, PDO::PARAM_INT);
     $stmt->bindParam(':scheduledate', $scheduledate, PDO::PARAM_STR);
     $stmt->bindParam(':scheduletime', $scheduletime, PDO::PARAM_STR);
+    $stmt->bindParam(':locid', $locid, PDO::PARAM_INT);
     $stmt->bindParam(':roomid', $roomid, PDO::PARAM_INT);
     $stmt->bindParam(':note', $note, PDO::PARAM_STR);
     $stmt->execute();
