@@ -14,16 +14,16 @@
         <form id="profile" class="needs-validation" novalidate>
             <div class="offset-2 col-10">
                 <div class="alert alert-info" id="alertinfo" style="display: none;"></div>
-                <div class="alert alert-info" id="errorinfo" style="display: none;"></div>
+                <div class="alert error-info" id="errorinfo" style="display: none;"></div>
                 <div class="row">
                     <div class="col-12 text-right">
-                        <button class="btn btn-outline-info btn-sm" type="button" onclick="user.save()"><i class="fas fa-save"></i> Save</button>
+                        <button class="btn btn-outline-info btn-sm" type="button" onclick="user.try()"><i class="fas fa-save"></i> Save</button>
 <!--                        <button class="btn btn-outline-danger btn-sm" type="button">Remove</button>-->
-                        <button class="btn btn-outline-secondary btn-sm" type="button" onclick="window.location='./';"><i class="fas fa-list-ol"></i> List</button>
+                        <button id="list" class="btn btn-outline-secondary btn-sm" type="button" onclick="window.location='./';"><i class="fas fa-list-ol"></i> List</button>
                     </div>
                 </div>
 
-                <input type="hidden" id="idx" value="<?php echo $_SESSION['idx']; ?>"/>
+                <input type="hidden" id="idx" value=""/>
                 <div class="form-row">
                     <div class="col-12">
                         <div class="alert alert-info"><i class="fas fa-edit"></i> PERSONAL INFO</div>
@@ -88,8 +88,8 @@
                         </div>
                     </div>
                     <div class="col-4">
-                        <label for="password">PASSWORD</label>
-                        <input type="password" id="pwd" name="pwd" class="form-control" required />
+                        <label for="password">PASSWORD&nbsp;&nbsp;<span class="badge badge-info">Default password is Last Name + 1234</span></label>
+                        <input type="password" id="pwd" name="pwd" class="form-control" />
                         <div class="valid-feedback">
                             Looks good!
                         </div>
