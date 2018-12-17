@@ -17,13 +17,13 @@
                     <div class="row">
                         <div class="col-12">
                             <label for="username">USER NAME</label>
-                            <input type="text" id="username" name="username" class="form-control" placeholder="USER NAME" value="blacksmilez"/>
+                            <input type="text" id="username" name="username" class="form-control" placeholder="USER NAME" />
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-12">
                             <label for="password">PASSWORD</label>
-                            <input type="password" id="password" name="password" class="form-control" placeholder="PASSWORD" value="1234"/>
+                            <input type="password" id="password" name="password" class="form-control" placeholder="PASSWORD" />
                         </div>
                     </div>
                     <div class="row">
